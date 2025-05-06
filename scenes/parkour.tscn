@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbcq4wndooy7l"]
+
+[ext_resource type="Texture2D" uid="uid://cf5k4h0uxoq3g" path="res://imports/Epic_GloriousPink_EquiRect.png" id="1_t14y4"]
+[ext_resource type="PackedScene" uid="uid://bmow3skodh8g8" path="res://scenes/player.tscn" id="2_a3vsc"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h85x6"]
+panorama = ExtResource("1_t14y4")
+
+[sub_resource type="Sky" id="Sky_4wyf3"]
+sky_material = SubResource("PanoramaSkyMaterial_h85x6")
+process_mode = 2
+radiance_size = 6
+
+[sub_resource type="Environment" id="Environment_ili6x"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_4wyf3")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 0.9
+ssao_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_normalized = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 251.873, 0)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.999961, 0, 0, 0, 0.999961, 0, 0, 0, 0.999961, -0.0132746, 0.103234, 0.00647327)
+operation = 2
+size = Vector3(0.943481, 1.05554, 0.944397)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ili6x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976105, 4.09644, 0.0915337)
+
+[node name="player" parent="." instance=ExtResource("2_a3vsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.959, 59.9391, 37.7202)

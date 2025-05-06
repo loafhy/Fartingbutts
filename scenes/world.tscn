@@ -1,6 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://ngf4gfgc3fft"]
 
 [ext_resource type="PackedScene" uid="uid://bmow3skodh8g8" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Texture2D" uid="uid://cf5k4h0uxoq3g" path="res://imports/Epic_GloriousPink_EquiRect.png" id="2_rwgxs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
 albedo_color = Color(0.645678, 1, 0.521696, 1)
@@ -162,25 +163,26 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 material = SubResource("ShaderMaterial_71j4m")
 size = Vector3(100, 1, 100)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nnsk1"]
-load_path = "res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-0e8ffa0151a88e944521a416b205b720.ctex"
-
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rwgxs"]
-panorama = SubResource("CompressedTexture2D_nnsk1")
+panorama = ExtResource("2_rwgxs")
 
-[sub_resource type="Sky" id="Sky_4wyf3"]
+[sub_resource type="Sky" id="Sky_rwgxs"]
 sky_material = SubResource("PanoramaSkyMaterial_rwgxs")
 process_mode = 2
 radiance_size = 6
 
 [sub_resource type="Environment" id="Environment_k0juu"]
 background_mode = 2
-sky = SubResource("Sky_4wyf3")
-sky_custom_fov = 70.1
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_rwgxs")
+ambient_light_source = 3
+reflected_light_source = 2
 tonemap_mode = 3
+tonemap_exposure = 0.9
 ssao_enabled = true
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
+glow_normalized = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -200,9 +202,10 @@ mesh = SubResource("BoxMesh_qfnet")
 
 [node name="player" parent="." instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59084, 2.38457, 0.0394251)
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k0juu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976105, -0.166451, 0.0915337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976105, 4.09644, 0.0915337)

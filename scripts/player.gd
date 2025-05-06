@@ -9,12 +9,12 @@ const freq = 2.0
 
 var Current_speed
 @export var sens = 0.006;
-
 var tbob = 0.0
+var not_in_menu = true
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotation.y = rotation.y - event.relative.x * sens
@@ -39,8 +39,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("Left", "Right","Up", "Down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if is_on_floor():
-		if direction:
+	if is_on_floor() and not_in_menu:
+		if direction and not_in_menu:
 			velocity.x = direction.x * Current_speed
 			velocity.z = direction.z * Current_speed
 		else:

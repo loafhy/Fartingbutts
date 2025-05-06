@@ -20,3 +20,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62368, -0.407976)
 
 [node name="Camera3D" type="Camera3D" parent="CollisionShape3D/MeshInstance3D/head"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
