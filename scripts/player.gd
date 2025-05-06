@@ -1,12 +1,16 @@
 extends CharacterBody3D
 
-var Current_speed
-const runspeed_speed = 10.0
-@export var jump_velocity = 10.0
-@onready var camera = $head/Camera3D
-
 const walk_speed = 5.0
+const runspeed_speed = 10.0
+const bobamp= 0.08
+const freq = 2.0
+@export var jump_velocity = 8.95
+@onready var camera = $CollisionShape3D/MeshInstance3D/head/Camera3D
+
+var Current_speed
 @export var sens = 0.006;
+
+var tbob = 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,16 +34,28 @@ func _physics_process(delta: float) -> void:
 		Current_speed = runspeed_speed
 	else: 
 		Current_speed = walk_speed
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("Left", "Right","Up", "Down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * Current_speed
-		velocity.z = direction.z * Current_speed
+	
+	if is_on_floor():
+		if direction:
+			velocity.x = direction.x * Current_speed
+			velocity.z = direction.z * Current_speed
+		else:
+			velocity.x = lerp(velocity.x, direction.x *Current_speed, delta*7.3)
+			velocity.z = lerp(velocity.z, direction.z *Current_speed, delta*7.3)
 	else:
-		velocity.x = move_toward(velocity.x, 0, Current_speed)
-		velocity.z = move_toward(velocity.z, 0, Current_speed)
+		velocity.x = lerp(velocity.x, direction.x *Current_speed, delta* 2.3)
+		velocity.z = lerp(velocity.z, direction.z *Current_speed, delta * 2.3)
+	tbob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(tbob)
 
 	move_and_slide()
+	
+func _headbob(time) -> Vector3:
+		var pos = Vector3.ZERO
+		pos.y = sin(time*freq) * bobamp
+		pos.x = cos(time*freq/ 2) * bobamp
+		return pos

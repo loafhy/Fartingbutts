@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://goa1udc5kwax"
-path="res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-6068f8bd80aed0a4d4ced97a710140d0.ctex"
+path="res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-09039e2cc8a930e0a8a94e4c0f670b2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://AllSky_Night_MoonBurst_Equirect.png"
-dest_files=["res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-6068f8bd80aed0a4d4ced97a710140d0.ctex"]
+source_file="res://imports/AllSky_Night_MoonBurst_Equirect.png"
+dest_files=["res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-09039e2cc8a930e0a8a94e4c0f670b2b.ctex"]
 
 [params]
 

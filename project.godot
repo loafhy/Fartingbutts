@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Fart-venturers"
-run/main_scene="uid://bmow3skodh8g8"
+run/main_scene="uid://ngf4gfgc3fft"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -82,4 +82,4 @@ right={
 
 3d/run_on_separate_thread=true
 3d/physics_engine="Jolt Physics"
-3d/default_gravity=9.81
+3d/default_gravity=20.0
