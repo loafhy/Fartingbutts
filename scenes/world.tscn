@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjvynertaao7o"]
+[gd_scene load_steps=15 format=3 uid="uid://ngf4gfgc3fft"]
 
 [ext_resource type="PackedScene" uid="uid://bmow3skodh8g8" path="res://scenes/player.tscn" id="1_nnsk1"]
 
@@ -128,8 +128,13 @@ noise = SubResource("FastNoiseLite_rwgxs")
 seamless = true
 seamless_blend_skirt = 1.0
 as_normal_map = true
-bump_strength = 21.6
 noise = SubResource("FastNoiseLite_rwgxs")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nnsk1"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rwgxs"]
+noise = SubResource("FastNoiseLite_nnsk1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 render_priority = 0
@@ -140,14 +145,15 @@ shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.0
 shader_parameter/texture_metallic = SubResource("NoiseTexture2D_4wyf3")
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.0
-shader_parameter/metallic = 1.0
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_rwgxs")
+shader_parameter/specular = 0.91
+shader_parameter/metallic = 0.42
 shader_parameter/refraction = 0.05
 shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_k0juu")
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.0700008
 shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.795, 0.7, 0.7)
+shader_parameter/uv1_scale = Vector3(0.09, 0.04, 0.02)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(0, 0, 0)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
@@ -155,6 +161,26 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 [sub_resource type="BoxMesh" id="BoxMesh_qfnet"]
 material = SubResource("ShaderMaterial_71j4m")
 size = Vector3(100, 1, 100)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nnsk1"]
+load_path = "res://.godot/imported/AllSky_Night_MoonBurst_Equirect.png-0e8ffa0151a88e944521a416b205b720.ctex"
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rwgxs"]
+panorama = SubResource("CompressedTexture2D_nnsk1")
+
+[sub_resource type="Sky" id="Sky_4wyf3"]
+sky_material = SubResource("PanoramaSkyMaterial_rwgxs")
+process_mode = 2
+radiance_size = 6
+
+[sub_resource type="Environment" id="Environment_k0juu"]
+background_mode = 2
+sky = SubResource("Sky_4wyf3")
+sky_custom_fov = 70.1
+tonemap_mode = 3
+ssao_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -174,3 +200,9 @@ mesh = SubResource("BoxMesh_qfnet")
 
 [node name="player" parent="." instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59084, 2.38457, 0.0394251)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k0juu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976105, -0.166451, 0.0915337)
